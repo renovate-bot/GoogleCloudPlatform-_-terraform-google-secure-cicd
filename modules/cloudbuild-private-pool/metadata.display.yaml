@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ spec:
     source:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-secure-cicd.git
       sourceType: git
-      dir: cloudbuild-private-pool
+      dir: /modules/cloudbuild-private-pool
   ui:
     input:
       variables:
@@ -50,6 +50,9 @@ spec:
         worker_address:
           name: worker_address
           title: Worker Address
+        worker_address_prefix_length:
+          name: worker_address_prefix_length
+          title: Worker Address Prefix Length
         worker_pool_name:
           name: worker_pool_name
           title: Worker Pool Name

@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ spec:
     source:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-secure-cicd.git
       sourceType: git
-      dir: secure-cd
-    version: 1.1.1
+      dir: /modules/secure-cd
+    version: 1.2.1
     actuationTool:
       flavor: Terraform
-      version: '>= 1.0'
+      version: ">= 1.0"
     description: {}
   content:
     examples:
@@ -49,14 +49,17 @@ spec:
     - name: app_deploy_trigger_yaml
       description: Name of application cloudbuild yaml file for deployment
       varType: string
+      defaultValue: null
       required: true
     - name: cache_bucket_name
       description: cloud build artifact bucket name
       varType: string
+      defaultValue: null
       required: true
     - name: cloudbuild_cd_repo
       description: Name of repo that stores the Cloud Build CD phase configs - for post-deployment checks
       varType: string
+      defaultValue: null
       required: true
     - name: cloudbuild_private_pool
       description: Cloud Build private pool self-link
@@ -65,10 +68,12 @@ spec:
     - name: cloudbuild_service_account
       description: Cloud Build SA email address
       varType: string
+      defaultValue: null
       required: true
     - name: clouddeploy_pipeline_name
       description: Cloud Deploy pipeline name
       varType: string
+      defaultValue: null
       required: true
     - name: deploy_branch_clusters
       description: mapping of branch names to cluster deployments. target_type can be one of `gke`, `anthos_cluster`, or `run`. See [clouddeploy_target Terraform docs](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/clouddeploy_target) for more details
@@ -87,6 +92,7 @@ spec:
     - name: gar_repo_name
       description: Docker artifact registry repo to store app build images
       varType: string
+      defaultValue: null
       required: true
     - name: labels
       description: A set of key/value label pairs to assign to the resources deployed by this blueprint.
@@ -95,10 +101,12 @@ spec:
     - name: primary_location
       description: Region used for key-ring
       varType: string
+      defaultValue: null
       required: true
     - name: project_id
       description: Project ID for CICD Pipeline Project
       varType: string
+      defaultValue: null
       required: true
     outputs:
     - name: binauthz_policy_required_attestations
@@ -111,15 +119,6 @@ spec:
       description: Names of CD Cloud Build triggers
   requirements:
     roles:
-    - level: Project
-      roles:
-      - roles/compute.networkAdmin
-      - roles/container.admin
-      - roles/binaryauthorization.policyEditor
-      - roles/resourcemanager.projectIamAdmin
-      - roles/iam.serviceAccountAdmin
-      - roles/serviceusage.serviceUsageViewer
-      - roles/iam.serviceAccountUser
     - level: Project
       roles:
       - roles/artifactregistry.admin
@@ -140,6 +139,15 @@ spec:
       - roles/storage.admin
       - roles/resourcemanager.projectIamAdmin
       - roles/viewer
+    - level: Project
+      roles:
+      - roles/compute.networkAdmin
+      - roles/container.admin
+      - roles/binaryauthorization.policyEditor
+      - roles/resourcemanager.projectIamAdmin
+      - roles/iam.serviceAccountAdmin
+      - roles/serviceusage.serviceUsageViewer
+      - roles/iam.serviceAccountUser
     services:
     - cloudresourcemanager.googleapis.com
     - cloudbilling.googleapis.com

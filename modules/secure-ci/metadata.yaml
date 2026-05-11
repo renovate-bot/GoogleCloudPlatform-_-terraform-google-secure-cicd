@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ spec:
     source:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-secure-cicd.git
       sourceType: git
-      dir: secure-ci
-    version: 1.1.1
+      dir: /modules/secure-ci
+    version: 1.2.1
     actuationTool:
       flavor: Terraform
-      version: '>= 0.13.0'
+      version: ">= 0.13.0"
     description: {}
   content:
     examples:
@@ -49,6 +49,7 @@ spec:
     - name: app_build_trigger_yaml
       description: Name of application cloudbuild yaml file
       varType: string
+      defaultValue: null
       required: true
     - name: app_source_repo
       description: Name of repo that contains app source code along with cloudbuild yaml
@@ -57,10 +58,12 @@ spec:
     - name: attestor_names_prefix
       description: A list of Binary Authorization attestors to create. The first attestor specified in this list will be used as the build-attestor during the CI phase.
       varType: list(string)
+      defaultValue: null
       required: true
     - name: build_image_config_yaml
       description: Name of image builder yaml file
       varType: string
+      defaultValue: null
       required: true
     - name: cache_bucket_name
       description: Name of cloudbuild artifact and cache GCS bucket
@@ -106,10 +109,12 @@ spec:
     - name: primary_location
       description: Region used for key-ring
       varType: string
+      defaultValue: null
       required: true
     - name: project_id
       description: Project ID for CICD Pipeline Project
       varType: string
+      defaultValue: null
       required: true
     - name: runner_build_folder
       description: Path to the source folder for the cloud builds submit command. Leave blank if `skip_provisioners = true`
@@ -122,6 +127,7 @@ spec:
     - name: trigger_branch_name
       description: A regular expression to match one or more branches for the build trigger.
       varType: string
+      defaultValue: null
       required: true
     - name: use_tf_google_credentials_env_var
       description: Optional GOOGLE_CREDENTIALS environment variable to be activated.

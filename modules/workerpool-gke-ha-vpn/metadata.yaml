@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ spec:
     source:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-secure-cicd.git
       sourceType: git
-      dir: workerpool-gke-ha-vpn
-    version: 1.1.1
+      dir: /modules/workerpool-gke-ha-vpn
+    version: 1.2.1
     actuationTool:
       flavor: Terraform
-      version: '>= 0.13.0'
+      version: ">= 0.13.0"
     description: {}
   content:
     examples:
@@ -51,28 +51,32 @@ spec:
       varType: string
       defaultValue: 169.254.2.0/30
     - name: gateway_1_asn
-      description: 'ASN for HA VPN gateway #1. You can use any private ASN (64512 through 65534, 4200000000 through 4294967294) that you are not using elsewhere in your network'
+      description: "ASN for HA VPN gateway #1. You can use any private ASN (64512 through 65534, 4200000000 through 4294967294) that you are not using elsewhere in your network"
       varType: number
       defaultValue: 65001
     - name: gateway_2_asn
-      description: 'ASN for HA VPN gateway #2. You can use any private ASN (64512 through 65534, 4200000000 through 4294967294) that you are not using elsewhere in your network'
+      description: "ASN for HA VPN gateway #2. You can use any private ASN (64512 through 65534, 4200000000 through 4294967294) that you are not using elsewhere in your network"
       varType: number
       defaultValue: 65002
     - name: gke_control_plane_cidrs
       description: map of GKE control plane CIDRs to name
       varType: map(string)
+      defaultValue: null
       required: true
     - name: gke_location
       description: Region of GKE subnet & cluster
       varType: string
+      defaultValue: null
       required: true
     - name: gke_network
       description: Name of GKE VPC
       varType: string
+      defaultValue: null
       required: true
     - name: gke_project
       description: Project ID of GKE VPC and cluster
       varType: string
+      defaultValue: null
       required: true
     - name: labels
       description: A set of key/value label pairs to assign to the resources deployed by this blueprint.
@@ -85,6 +89,7 @@ spec:
     - name: project_id
       description: Project ID for Cloud Build
       varType: string
+      defaultValue: null
       required: true
     - name: vpn_router_name_prefix
       description: Prefix for HA VPN router names
@@ -93,10 +98,12 @@ spec:
     - name: workerpool_network
       description: Self link for Cloud Build VPC
       varType: string
+      defaultValue: null
       required: true
     - name: workerpool_range
       description: Address range of Cloud Build Workerpool
       varType: string
+      defaultValue: null
       required: true
     outputs:
     - name: vpn_gateway_cloudbuild

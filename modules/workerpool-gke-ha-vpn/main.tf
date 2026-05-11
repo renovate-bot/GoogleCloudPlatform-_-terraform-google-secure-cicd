@@ -44,6 +44,8 @@ module "vpn_ha_1" {
       vpn_gateway_interface           = 0
       peer_external_gateway_interface = null
       shared_secret                   = ""
+      peer_external_gateway_self_link = null
+      bgp_session_name                = null
     }
     remote-1 = {
       bgp_peer = {
@@ -56,6 +58,8 @@ module "vpn_ha_1" {
       vpn_gateway_interface           = 1
       peer_external_gateway_interface = null
       shared_secret                   = ""
+      peer_external_gateway_self_link = null
+      bgp_session_name                = null
     }
   }
 }
@@ -87,6 +91,8 @@ module "vpn_ha_2" {
       vpn_gateway_interface           = 0
       peer_external_gateway_interface = null
       shared_secret                   = module.vpn_ha_1.random_secret
+      peer_external_gateway_self_link = null
+      bgp_session_name                = null
     }
     remote-1 = {
       bgp_peer = {
@@ -99,6 +105,8 @@ module "vpn_ha_2" {
       vpn_gateway_interface           = 1
       peer_external_gateway_interface = null
       shared_secret                   = module.vpn_ha_1.random_secret
+      peer_external_gateway_self_link = null
+      bgp_session_name                = null
     }
   }
 }
